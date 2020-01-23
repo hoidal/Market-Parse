@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="index.css">
+    <title>Market Parse | Sign In</title>
+</head>
+    <body>
+        <h1>Welcome to Market Parse!</h1>
+
+        <div id="newOrExistingUserDiv">
+            <h3>Are you a new or existing user?</h3>
+            <div>
+                <button id="newUser">New User</button>
+                <button id="existingUser">Existing User</button>
+            </div>
+        </div>
+
+        <div id="signUpDiv">
+            <h2>Sign Up Form</h2>
+            <form id="signUpForm">
+                <label>Name</label>
+                <input type="text" name="name" required/>
+                <label>Email</label>
+                <input type="email" name="email" required/>
+                <label>Password</label>
+                <input type="text" name="password" required/>
+                <label>Confirm Password</label>
+                <input type="text" name="passwordConfirm" required/>
+                <input type="submit" value= "Sign up"/>
+            </form>
+            <p class="errorMessage"></p>
+        </div>
+       
+        <div id="loginDiv">
+            <h2>Login Form</h2>
+            <form id="logInForm">
+                <label>Email</label>
+                <input type="email" name="email" required/>
+                <label>Password</label>
+                <input type="text" name="password" required/>
+                <input type="submit" value= "Login"/>
+            </form>
+            <p class="errorMessage"></p>
+        </div>
+        
+
+        <script src="index.js"></script>
+    </body>
+</html>
