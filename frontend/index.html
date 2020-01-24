@@ -8,10 +8,17 @@
     <title>Market Parse | Sign In</title>
 </head>
     <body>
-        <h1>Welcome to Market Parse!</h1>
+        <header>
+            <div id="logo">
+                <img src="https://i.imgur.com/eq7f2ah.png">
+                <h1 id="logo-name">Market Parse</h1>
+            </div>
+        </header>
+
+        <h1 id="welcome-message">Welcome to Market Parse!</h1>
 
         <div id="newOrExistingUserDiv">
-            <h3>Are you a new or existing user?</h3>
+            <h3 id="new-or-existing">Are you a new or existing user?</h3>
             <div>
                 <button id="newUser">New User</button>
                 <button id="existingUser">Existing User</button>
@@ -26,13 +33,13 @@
                 <label>Email</label>
                 <input type="email" name="email" required/>
                 <label>Password</label>
-                <input type="text" name="password" required/>
+                <input type="password" name="password" required/>
                 <label>Confirm Password</label>
-                <input type="text" name="passwordConfirm" required/>
-                <input type="submit" value= "Sign up"/>
+                <input type="password" name="passwordConfirm" required/>
+                <input id="sign-up-button" type="submit" value= "Sign up"/>
             </form>
-            <p id="passwordError"></p>
-            <p class="errorMessage"></p>
+            <p id="signup-error-message"></p>
+            <p id="password-error"></p>
         </div>
        
         <div id="loginDiv">
@@ -44,7 +51,7 @@
                 <input type="text" name="password" required/>
                 <input type="submit" value= "Login"/>
             </form>
-            <p class="errorMessage"></p>
+            <p id="login-error-message"></p>
         </div>
         
 

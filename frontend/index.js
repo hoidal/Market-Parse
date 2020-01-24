@@ -1,6 +1,7 @@
 const signUpForm = document.getElementById("signUpForm")
 const logInForm = document.getElementById("logInForm")
-const errorMessage = document.querySelector(".errorMessage")
+const errorMessage = document.getElementById("login-error-message")
+const errorMessageSignUp = document.getElementById("signup-error-message")
 const baseURL = "http://localhost:3000"
 
 const token = localStorage.getItem("token") ? `bearer ${localStorage.getItem("token")}` : null
@@ -52,13 +53,13 @@ function signUp(event){
     })
     .then(checkForError)
     .then(redirectToLogin)
-    .catch(showError)
+    .catch(displayError)
 }
 
 function newUserInfo(form){
     const formData = new FormData(form)
     if(formData.get("password") !== formData.get("passwordConfirm")) {
-        const passwordError = document.getElementById("passwordError")
+        const passwordError = document.getElementById("password-error")
         passwordError.innerText = "Passwords do not match. Please try again."
     } else {
         return {
@@ -67,6 +68,10 @@ function newUserInfo(form){
                 password: formData.get("password")
         }
     }
+}
+
+function displayError(error){
+    errorMessageSignUp.innerText = error
 }
 
 function redirectToLogin(){
@@ -113,19 +118,19 @@ function generateToken({ token }){
     console.log(token)
 }
 
+function showError(error){
+    errorMessage.innerText = error
+}
+
 function redirectToUserPage(){
     window.location.href = "/user.html"
 }
 
-//shared Sign Up and Sign In functions
+//shared Sign Up and Sign In function
 function checkForError(response){
     return !response.ok 
         ? response.json().then(({error}) => {
             throw new Error(error)
         })
         : response.json()
-}
-
-function showError(error){
-    errorMessage.innerText = error
 }

@@ -6,8 +6,9 @@ const token = localStorage.getItem("token")
     : null
 
 const authHeader = { headers: { "Authorization": token }, }
-const userStockContainer = document.getElementById("stockContainer")
-const stockCardDiv = document.getElementById("stockCardDiv")
+const stockContainer = document.getElementById("stockContainer")
+const stockCardDiv = document.getElementById("userStockCardDiv")
+const stockHeader = document.getElementById("stockHeader")
 
 
 token ? loadUserPage() : loginPageRedirect()
@@ -26,6 +27,10 @@ logoutButton.addEventListener("click", () => {
 
 //User content with valid token
 function loadUserPage(){
+    while(userStockCardDiv.hasChildNodes()){
+    userStockCardDiv.removeChild(userStockCardDiv.lastChild)
+    }
+
     fetch(`${baseURL}/users`, authHeader)
         .then(parseResponse)
         .then(loadWelcomeMessages)
@@ -39,14 +44,13 @@ function parseResponse(response){
 function loadWelcomeMessages(user){      
     const welcomeMessage = document.getElementById("welcomeMessage")
     welcomeMessage.innerText = `Welcome back, ${user.name}!`
-    const stockHeader = document.getElementById("stockHeader")
     
     if(user.stocks.length === 0){
         stockHeader.innerText = "You are not currently following any stocks..."
     } else {
         stockHeader.innerText = "Your followed stocks:"
     }
-    userStockContainer.prepend(stockHeader)
+    stockContainer.prepend(stockHeader)
     loadFollowedStocks(user)
 }
 
@@ -60,7 +64,7 @@ function loadFollowedStocks(user){
         stockTicker.innerText = stock.ticker
         stockName.innerText = stock.name
 
-        stockCardDiv.appendChild(stockCard)
+        userStockCardDiv.appendChild(stockCard)
         stockCard.append(stockTicker, stockName)
 
         fetch(`https://api.worldtradingdata.com/api/v1/stock?symbol=${stock.ticker}&api_token=${worldTradingDataKey}`)
@@ -88,9 +92,8 @@ function loadFollowedStocks(user){
                 stockCard.appendChild(removeStockButton)
 
                 removeStockButton.addEventListener("click", (event) => {
-                    console.log(event.target)
                     event.target.parentNode.remove()
-                    fetch(`http://localhost:3000/stocks/${stock.id}`, {
+                    fetch(`${baseURL}/stocks/${stock.id}`, {
                         method: 'DELETE',
                         headers: {
                             "Content-Type": "application/json",
@@ -105,7 +108,7 @@ function loadFollowedStocks(user){
 
 //search functionality
 const searchForm = document.getElementById("stockSearchForm")
-const searchResultContainer = document.getElementById("searchResultContainer")
+const searchStockCardDiv = document.getElementById("searchStockCardDiv")
 
 searchForm.addEventListener("submit", startSearch)
 
@@ -113,12 +116,13 @@ function startSearch(event){
     event.preventDefault()
     const searchRequest = getSearchParams(event.target)
 
-    while(searchResultContainer.hasChildNodes()){
-    searchResultContainer.removeChild(searchResultContainer.lastChild)
+    while(searchStockCardDiv.hasChildNodes()){
+    searchStockCardDiv.removeChild(searchStockCardDiv.lastChild)
     }
 
-    userStockContainer.style.display = "none"
-    searchResultContainer.style.display = "flex"
+    stockHeader.innerText = "Search results..."
+    userStockCardDiv.style.display = "none"
+    searchStockCardDiv.style.display = "flex"
     displayResults(searchRequest)
 }
 
@@ -153,7 +157,7 @@ function displayResults(searchRequest){
 
         stockCardFront.append(tickerSymbol, stockName, stockPrice, stockCurrency, stockExchange)
         stockCard.append(stockCardFront)
-        searchResultContainer.appendChild(stockCard)
+        searchStockCardDiv.appendChild(stockCard)
 
         stockCardFront.addEventListener('click', (event) => {
             const stockCardBack = document.createElement("div")
@@ -256,8 +260,8 @@ function postStock(selectedStock){
             }
         })
     })
-    userStockContainer.style.display = "flex"
-    searchResultContainer.style.display = "none"
+    .then(response => response.json())
+    .then(window.location.reload())
 }
 
 

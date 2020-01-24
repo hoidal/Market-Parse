@@ -3,18 +3,71 @@ body {
     color: white;
 }
 
+#logo {
+    color: black;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin: 1rem 1rem 0 4rem;
+}
+
+#logo-name {
+    font-size: 6rem;
+    margin: 1rem;
+    font-weight: bold;
+}
+
+img {
+    height: 8rem;
+    margin: 1rem;
+}
+
+#welcome-message {
+    margin: 1rem 1rem 0 5rem;
+    font-size: 250%;
+}
+
+#new-or-existing {
+    font-size: 150%;
+}
+
+
+#newOrExistingUserDiv {
+    margin: 1rem 1rem 0 5rem;
+}
+
 #signUpDiv {
     display: none;
+    margin: 1rem 1rem 1rem 5rem;
+}
+
+#signUpForm {
+    width: 20rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#sign-up-button {
+    width: 5rem;
+    margin: 1rem 0;
 }
 
 #loginDiv {
     display: none;
+    margin: 1rem 1rem 1rem 5rem;
 }
 
-#passwordError {
+#password-error {
     color: red;
 }
 
-.errorMessage {
+#signup-error-message {
+    color: red;
+}
+
+#login-error-message {
     color: red;
 }
