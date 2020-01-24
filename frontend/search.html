@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="search.css">
+    <title>Stock Search</title>
+</head>
+    <body>
+        <a href="index.html">Return Home</a>
+
+        <div id="search_box">
+            <h3>Stock Search</h3>
+            <h4>Enter Company Name or Ticker Symbol</h4>
+            <form action="" id="search_form" onsubmit="startSearch(event)">
+                <input type="text" name="search_input" id="search_input">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div id="search_results_container"></div>
+
+        <script src="search.js"></script>
+    </body>
+</html>

@@ -41,30 +41,30 @@ signUpForm.addEventListener("submit", signUp)
 function signUp(event){
     event.preventDefault()
 
-    const newUser = newUserInfo(event.target)
+    const user = newUserInfo(event.target)
 
     fetch(`${baseURL}/users`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ newUser })
-    }).then(checkForError)
+        body: JSON.stringify({ user })
+    })
+    .then(checkForError)
     .then(redirectToLogin)
     .catch(showError)
 }
 
 function newUserInfo(form){
     const formData = new FormData(form)
-    if(formData.get("password") !== formData.get("passwordConfirm")){
-        showError("Passwords do not match. Please try again.")
+    if(formData.get("password") !== formData.get("passwordConfirm")) {
+        const passwordError = document.getElementById("passwordError")
+        passwordError.innerText = "Passwords do not match. Please try again."
     } else {
         return {
-            user: {
                 name: formData.get("name"),
                 email: formData.get("email"),
                 password: formData.get("password")
-            }
         }
     }
 }
@@ -72,7 +72,7 @@ function newUserInfo(form){
 function redirectToLogin(){
     loginDiv.style.display = "block"
     signUpDiv.style.display = "none"
-    const loginPrompt = document.createElement("h5")
+    const loginPrompt = document.createElement("h4")
     loginPrompt.innerText = "Thank you for signing up. Please sign in to begin using Market Parse."
     loginDiv.appendChild(loginPrompt)
 }
@@ -110,6 +110,7 @@ function getUser(form){
 
 function generateToken({ token }){
     localStorage.setItem("token", token)
+    console.log(token)
 }
 
 function redirectToUserPage(){

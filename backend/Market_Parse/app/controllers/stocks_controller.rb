@@ -1,7 +1,14 @@
+require 'byebug'
+
 class StocksController < ApplicationController
+    before_action :authenticate, only: [:create, :destroy]
    
     def create
-        @stock = Stock.new(stock_params)
+        @stock = Stock.new(
+            name: params[:stock][:name],
+            ticker: params[:stock][:ticker],
+            user_id: @user.id
+        )
 
         if @stock.save
             render json: { stock: @stock }
