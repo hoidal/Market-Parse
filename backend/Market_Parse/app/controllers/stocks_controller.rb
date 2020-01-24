@@ -1,5 +1,3 @@
-require 'byebug'
-
 class StocksController < ApplicationController
     before_action :authenticate, only: [:create, :destroy]
    

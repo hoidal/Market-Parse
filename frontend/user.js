@@ -73,7 +73,7 @@ function loadFollowedStocks(user){
         
                 const stockPrice = document.createElement("h3")
                 stockPrice.className = "stockPrice"
-                stockPrice.innerText = `Price: $${parseFloat(stocks.data[0].price).toFixed(2).toLocaleString()}`
+                stockPrice.innerText = `Price: $${(parseFloat(stocks.data[0].price)).toFixed(2).toLocaleString()}`
 
                 const intradayChange = document.createElement("h3")
                 intradayChange.className = "intraDayChange"
@@ -105,7 +105,6 @@ function loadFollowedStocks(user){
     })
 }
 
-
 //search functionality
 const searchForm = document.getElementById("stockSearchForm")
 const searchStockCardDiv = document.getElementById("searchStockCardDiv")
@@ -121,9 +120,19 @@ function startSearch(event){
     }
 
     stockHeader.innerText = "Search results..."
+    const backToUserStocksButton = document.createElement("button")
+    backToUserStocksButton.id = "back-to-user-stocks"
+    backToUserStocksButton.innerText = "Back"
+    stockHeader.appendChild(backToUserStocksButton)
+
+    backToUserStocksButton.addEventListener("click", () => {
+        backToUserStocks()
+    })
+
     userStockCardDiv.style.display = "none"
     searchStockCardDiv.style.display = "flex"
     displayResults(searchRequest)
+    searchForm.reset()
 }
 
 function getSearchParams(form){
@@ -231,7 +240,7 @@ function displayMoreInfo(ticker, stockCard, stockCardBack){
         stockCard.appendChild(stockCardBack)
 
         stockCardBack.addEventListener('click', (event) => {
-            if(event.target != addToWatchlistButton){
+            if(event.target !== addToWatchlistButton){
                 stockCardBack.style.display = 'none'
                 stockCardBack.parentElement.children.item(0).style.display = 'block'
             }
@@ -264,6 +273,40 @@ function postStock(selectedStock){
     .then(window.location.reload())
 }
 
+function backToUserStocks(){
+     return window.location.reload()
+}
+
+//delete account
+const deleteAccountButton = document.getElementById("delete-account-button")
+deleteAccountButton.addEventListener("click", (event) => {
+    const confirmDelete = confirm("Are you sure you wish to delete your account?")
+    if (confirmDelete === true) { 
+        alert("Thank you for trying Market Parse!")
+        getUserId()
+    } else { 
+        alert("Thank you for continuing to use Market Parse!")
+    } 
+})
+
+function getUserId(event){
+    fetch(`${baseURL}/users`, authHeader)
+        .then(parseResponse)
+        .then(deleteUser)
+}
+
+function deleteUser(user){
+    fetch(`${baseURL}/users/${user.id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token
+        }
+    })
+    .then(parseResponse)
+    .then(localStorage.removeItem("token"))
+    .then(window.location.reload())
+}
 
 
 
