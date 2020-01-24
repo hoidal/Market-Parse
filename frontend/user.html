@@ -8,23 +8,31 @@
     <title>Your Stocks</title>
 </head>
     <body>
-        <button id="logout">logout</button>
-        <br><br/>
-        
-        <div id="searchDiv">
-            <form id="stockSearchForm">
-                <label>Enter Ticker or Name</label>
-                <input type="text" name="name" required/>
-                <input type="submit" value="Search">
-            </form>
-        </div>
+        <header>
+            <div id="logo">
+                <img src="https://w0.pngwave.com/png/259/1017/computer-icons-business-bar-chart-icon-design-business-png-clip-art.png"/>
+            </div>
+            <button id="logout">logout</button>
+        </header>
 
         <div id="welcomeDiv">
             <h1 id="welcomeMessage"></h1>
+            <br>
+            <div id="searchDiv">
+                <form id="stockSearchForm">
+                    <label>Enter Ticker or Name</label>
+                    <input type="text" name="name" required/>
+                    <input type="submit" value="Search">
+                </form>
+                <div id="searchResultContainer"></div>
+            </div>
+            <br>
             <h3 id="stockHeader"></h3>
         </div>
         
-        <div id="stockContainer"></div>
+        <div id="stockContainer">
+            <div id="stockCardDiv"></div>
+        </div>
         
         <script src="user.js"></script>
     </body>

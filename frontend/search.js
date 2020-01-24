@@ -10,7 +10,7 @@ function loginPageRedirect(){
     window.location.href = "/index.html"
 }
 
-//search page script
+//search results
 const searchResultContainer = document.getElementById("search_results_container")
 
 function startSearch(event) {
@@ -143,8 +143,6 @@ function postStock(selectedStock){
     const cardInfo = selectedStock.parentNode
     const ticker = cardInfo.children[0].innerText
     const name = cardInfo.children[1].innerText
-    // const user_id = 9
-    //USER ID CURRENTLY HARDCODED FOR TESTING
     fetch(`${baseURL}/stocks`, {
         method: 'POST',
         headers: {
@@ -158,5 +156,5 @@ function postStock(selectedStock){
             }
         })
     })
-    // window.location.href = "index.html"
+    // window.location.href = "/user.html"
 }
