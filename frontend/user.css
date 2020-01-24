@@ -8,7 +8,7 @@ body {
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: baseline;
-    margin: 1rem 1rem 0 4rem;
+    margin: 1rem 1rem 0 5rem;
 }
 
 #logo-name {
@@ -25,7 +25,7 @@ img {
 #welcomeDiv {
     color: white;
     font-weight: bold;
-    margin: 0 1rem 0 5rem;
+    margin: 0 1rem 0 6.5rem;
 }
 
 label {
@@ -50,20 +50,20 @@ label {
     border-style: double;
     border-color: black;
     border-radius: 1rem;
-    margin: auto 4.5rem;
+    margin: auto 6rem;
     padding: 2rem;
 }
 
 #userStockCardDiv {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
 #searchStockCardDiv {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
 .stockCard {
@@ -98,4 +98,6 @@ label {
     flex-direction: column;
 }
 
-
+#search-field {
+    width: 8rem;
+}

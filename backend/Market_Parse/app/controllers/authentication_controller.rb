@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
         @user = User.find_by(email: params[:user][:email])
     
         if !@user
-            render json: { error: "Invalid username. Please try again." }, status: :unauthorized
+            render json: { error: "Invalid email. Please try again." }, status: :unauthorized
         else
             if !@user.authenticate(params[:user][:password])
                 render json: { error: "Incorrect password. Please try again." }, status: :unauthorized
